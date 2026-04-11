@@ -155,7 +155,7 @@ CMD ["python", "app.py"]
 - Save this image to Docker Hub.
 
 ```bash
-docker build -t username/iot-app .
+docker build -t sofiane2003 .
 ```
 
 ---
@@ -163,7 +163,7 @@ docker build -t username/iot-app .
 uploade image in docker Hub
 
 ```bash
-docker push username/iot-app
+docker push sofiane2003
 ```
 
 ---
@@ -172,7 +172,7 @@ docker push username/iot-app
 Mini-project
 
 ```bash
-docker pull username/iot-app
+docker pull sofiane2003
 ```
 
 ---
