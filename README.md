@@ -18,7 +18,7 @@ Part 1: Preparing the Environment
 
 1. Install Docker
 
-<img src="images/install.png" width="600">
+<img src="install.png" width="600">
 
 3. Verify the Installation
   
