@@ -18,11 +18,11 @@ Part 1: Preparing the Environment
 
 1. Install Docker
 
-<img src="install.png" width="600">
+<img src="docker.png" width="600">
 
 3. Verify the Installation
 
-<img src="verfiy.png" width="100">
+<img src="verfiy.png" width="600">
   
 5. Test Docker
 
@@ -54,7 +54,7 @@ Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/
 ~~~
 
-<img src="test.png" width="100">
+<img src="test.png" width="600">
 
 Partie 2 : Questions
 
