@@ -18,9 +18,11 @@ Part 1: Preparing the Environment
 
 1. Install Docker
 
-2. Verify the Installation
+<img src="images/install.png" width="600">
+
+3. Verify the Installation
   
-3. Test Docker
+4. Test Docker
 
 Partie 2 : Questions
 
