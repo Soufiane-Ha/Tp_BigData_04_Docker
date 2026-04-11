@@ -22,7 +22,7 @@ Part 1: Preparing the Environment
 
 3. Verify the Installation
 
-<img src="verify.png" width="100">
+<img src="verfiy.png" width="100">
   
 5. Test Docker
 
