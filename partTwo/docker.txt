@@ -1,0 +1,39 @@
+docker build -t tp-4-docker .
+
+
+docker login
+docker tag tp-4-docker sofiane2003/tp-4-docker
+docker push sofiane2003/tp-4-docker
+
+docker pull sofiane2003/tp-4-docker
+
+docker run -d --name container1 sofiane2003/tp-4-docker
+docker run -d --name container2 sofiane2003/tp-4-docker
+docker run -d --name container3 sofiane2003/tp-4-docker
+
+
+docker network create tp_4_network                  
+
+docker network connect tp_4_network container1         
+docker network connect tp_4_network container2
+docker network connect tp_4_network container3
+
+docker run -d -p 8081:80 --name container1 sofiane2003/tp-4-docker
+docker run -d -p 8082:80 --name container2 sofiane2003/tp-4-docker
+docker run -d -p 8083:80 --name container3 sofiane2003/tp-4-docker 
+docker ps                                          
+
+CONTAINER ID   IMAGE                       COMMAND                  CREATED              STATUS          PORTS                                         NAMES
+249ff9f31ea7   sofiane2003/tp-4-docker     "python file.py"         About a minute ago   Up 11 seconds   0.0.0.0:8083->80/tcp, [::]:8083->80/tcp       container3   
+4432a843ed56   sofiane2003/tp-4-docker     "python file.py"         About a minute ago   Up 12 seconds   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp       container2
+2a7c0cb60982   sofiane2003/tp-4-docker     "python file.py"         2 minutes ago        Up 13 seconds   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp       container1   
+
+
+
+
+docker images
+IMAGE                                      IMAGE ID       CREATED        SIZE  
+sofiane2003/tp-4-docker:latest              f16016a2508d   1.27GB         197MB
+tp-4-docker:latest                          f16016a2508d   1.27GB         197MB
+docker/lsp                  golang          c7a4e070dc57   6 weeks ago    158MB
+docker/labs-vscode-installer 0.0.9          e2ad35612109   5 months ago   53.8MB
