@@ -1,0 +1,289 @@
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker build -t tp-4-docker .
+[+] Building 131.7s (12/12) FINISHED                         docker:desktop-linux
+ => [internal] load build definition from Dockerfile                         0.1s
+ => => transferring dockerfile: 365B                                         0.0s 
+ => [internal] load metadata for docker.io/library/python:3.9-slim           0.9s 
+ => [internal] load .dockerignore                                            0.0s
+ => => transferring context: 2B                                              0.0s 
+ => [1/7] FROM docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3  0.1s 
+ => => resolve docker.io/library/python:3.9-slim@sha256:2d97f6910b16bd338d3  0.1s 
+ => [internal] load build context                                            0.0s 
+ => => transferring context: 151B                                            0.0s 
+ => CACHED [2/7] WORKDIR /app                                                0.0s
+ => CACHED [3/7] RUN apt-get update && apt-get install -y     libfreetype6-  0.0s
+ => [4/7] COPY requirements.txt .                                            0.1s 
+ => [5/7] RUN pip install --no-cache-dir -r requirements.txt                80.8s 
+ => [6/7] COPY file.py .                                                     0.2s 
+ => [7/7] COPY questions.csv .                                               1.8s 
+ => exporting to image                                                      46.9s 
+ => => exporting layers                                                     27.8s 
+ => => exporting manifest sha256:8ae925a6ad850aaade6282d21fafaddaf188deb55a  0.0s 
+ => => exporting config sha256:1ccec472b8d4f9ad6ced8be9ed17d5e699564256452d  0.0s 
+ => => exporting attestation manifest sha256:9d54ce35828d643db7f62a35ce2fc5  0.1s 
+ => => exporting manifest list sha256:f16016a2508d177ef56121354f84ebea06917  0.1s 
+ => => naming to docker.io/library/tp-4-docker:latest                        0.0s 
+ => => unpacking to docker.io/library/tp-4-docker:latest                    18.4s 
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/bn4v4wxbh6gwoonl6ex3hz0co
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker login
+Authenticating with existing credentials... [Username: sofiane2003]
+
+i Info → To login with a different account, run 'docker logout' followed by 'docker login'
+
+
+Login Succeeded
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker tag tp-4-docker sofiane2003/tp-4-docker
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker push spfiane2003/tp-4-docker
+
+Using default tag: latest
+The push refers to repository [docker.io/spfiane2003/tp-4-docker]
+tag does not exist: spfiane2003/tp-4-docker:latest
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker push sofiane2003/tp-4-docker
+
+Using default tag: latest
+The push refers to repository [docker.io/sofiane2003/tp-4-docker]
+c798d987bbcf: Pushed
+8a2a88faf6db: Pushed
+900629565b50: Pushed
+d6c3569dd6ba: Pushed
+92dff37604e9: Pushed
+b3ec39b36ae8: Pushed
+fd9f4a6c71bc: Pushed
+ee1d1cff16d3: Pushed
+fc7443084902: Pushed 
+ea56f685404a: Pushed
+38513bd72563: Pushed
+latest: digest: sha256:f16016a2508d177ef56121354f84ebea06917af2debab7466459d8396385ecd5 size: 856
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker pull sofiane2003/tp-4-docker
+
+Using default tag: latest
+latest: Pulling from sofiane2003/tp-4-docker
+Digest: sha256:f16016a2508d177ef56121354f84ebea06917af2debab7466459d8396385ecd5
+Status: Image is up to date for sofiane2003/tp-4-docker:latest
+docker.io/sofiane2003/tp-4-docker:latest
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d --name container1 sofiane/tp-4-docker
+Unable to find image 'sofiane/tp-4-docker:latest' locally
+docker: Error response from daemon: pull access denied for sofiane/tp-4-docker, repository does not exist or may require 'docker login'
+
+Run 'docker run --help' for more information
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d --name container2 sofiane/tp-4-docker
+Unable to find image 'sofiane/tp-4-docker:latest' locally
+docker: Error response from daemon: pull access denied for sofiane/tp-4-docker, repository does not exist or may require 'docker login'
+
+Run 'docker run --help' for more information
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d --name container3 sofiane/tp-4-docker
+Unable to find image 'sofiane/tp-4-docker:latest' locally
+docker: Error response from daemon: pull access denied for sofiane/tp-4-docker, repository does not exist or may require 'docker login'
+
+Run 'docker run --help' for more information
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker network create tp_4_network
+4d0fcb8caec6b8c9d2d8000c34cb4daefb14056bf951ee4a37897a3cb5b4cc6c
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker network connect tp_4_network container1
+Error response from daemon: No such container: container1
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker network connect tp_4_network container2
+Error response from daemon: No such container: container2
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker network connect tp_4_network container3
+Error response from daemon: No such container: container3
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d -p 8081:80 --name container1 sofiane2003/tp-4-docker
+2a7c0cb60982488fb868203c6167a07b3a90de669cd98b9dbdb64030baaab83a
+docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint container1 (d6fe499f301882305cc57c33a0d315975037b25f5fbc340ad0cf9e5e1ff797c2): Bind for 0.0.0.0:8081 failed: port is already allocated
+
+Run 'docker run --help' for more information
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d -p 8082:80 --name container2 sofiane2003/tp-4-docker
+4432a843ed56b5368fa1e256f518ff30458f39ed0ffca8795caba09e10755a3a
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d -p 8083:80 --name container3 sofiane2003/tp-4-docker
+249ff9f31ea75c2ae85a3e5027d5547506157c071314c7a9da8b7c28d9a2fda2
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker ps
+CONTAINER ID   IMAGE                       COMMAND                  CREATED       STATUS        PORTS                                         NAMES
+3a40d3a0f706   my-php-app                  "docker-php-entrypoi…"   3 weeks ago   Up 3 weeks    0.0.0.0:8085->80/tcp, [::]:8085->80/tcp       my-web-site
+aa28f1f3befc   mysql:8.0                   "docker-entrypoint.s…"   3 weeks ago   Up 45 hours   3306/tcp, 33060/tcp                           mysql_db
+3bcd303d27a8   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago   Up 4 weeks    80/tcp                                        wonderful_brattain    
+559375913f9f   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago   Up 4 weeks    80/tcp                                        nifty_lamport
+31a68e4a00b8   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago   Up 4 weeks    80/tcp                                        strange_stonebraker
+a76e4d629523   test-web                    "docker-php-entrypoi…"   4 weeks ago   Up 4 weeks    0.0.0.0:8080->80/tcp, [::]:8080->80/tcp       test-web-1
+9fe325349159   phpmyadmin/phpmyadmin       "/docker-entrypoint.…"   4 weeks ago   Up 4 weeks    0.0.0.0:8081->80/tcp, [::]:8081->80/tcp       phpmyadmin
+f03faeb415a9   mysql:8.0                   "docker-entrypoint.s…"   4 weeks ago   Up 4 weeks    0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp   test-db-1
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker ps
+CONTAINER ID   IMAGE                       COMMAND                  CREATED              STATUS          PORTS                                         NAMES
+249ff9f31ea7   sofiane2003/tp-4-docker     "python file.py"         About a minute ago   Up 11 seconds   0.0.0.0:8083->80/tcp, [::]:8083->80/tcp       container3   
+4432a843ed56   sofiane2003/tp-4-docker     "python file.py"         About a minute ago   Up 12 seconds   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp       container2
+2a7c0cb60982   sofiane2003/tp-4-docker     "python file.py"         2 minutes ago        Up 13 seconds   80/tcp                                        container1   
+3a40d3a0f706   my-php-app                  "docker-php-entrypoi…"   3 weeks ago          Up 3 weeks      0.0.0.0:8085->80/tcp, [::]:8085->80/tcp       my-web-site
+aa28f1f3befc   mysql:8.0                   "docker-entrypoint.s…"   3 weeks ago   
+       Up 45 hours     3306/tcp, 33060/tcp                           mysql_db
+3bcd303d27a8   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago          Up 4 weeks      80/tcp                                        wonderful_brattain
+559375913f9f   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago          Up 4 weeks      80/tcp                                        nifty_lamport
+31a68e4a00b8   sofiane2003/mysite:latest   "docker-php-entrypoi…"   4 weeks ago          Up 4 weeks      80/tcp                                        strange_stonebraker
+a76e4d629523   test-web                    "docker-php-entrypoi…"   4 weeks ago          Up 4 weeks      0.0.0.0:8080->80/tcp, [::]:8080->80/tcp       test-web-1   
+9fe325349159   phpmyadmin/phpmyadmin       "/docker-entrypoint.…"   4 weeks ago          Up 4 weeks      0.0.0.0:8081->80/tcp, [::]:8081->80/tcp       phpmyadmin   
+f03faeb415a9   mysql:8.0                   "docker-entrypoint.s…"   4 weeks ago          Up 4 weeks      0.0.0.0:3306->3306/tcp, [::]:3306->3306/tcp   test-db-1    
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker run -d -p 8084:80 --name container1 sofiane2003/tp-4-docker
+docker: Error response from daemon: Conflict. The container name "/container1" is already in use by container "2a7c0cb60982488fb868203c6167a07b3a90de669cd98b9dbdb64030baaab83a". You have to remove (or rename) that container to be able to reuse that name.
+
+Run 'docker run --help' for more information
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker images
+                                                              i Info →   U  In Use
+IMAGE                             ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker/desktop-kubernetes:kubernetes-v1.34.1-cni-v1.7.1-critools-v1.33.0-cri-dockerd-v0.3.20-1-debian
+                                  12d6673564e0        592MB          185MB        
+docker/desktop-storage-provisioner:v3.0
+                                  57d2b6ad1c6f       80.3MB         23.9MB    U   
+docker/desktop-vpnkit-controller:v4.0
+                                  bdaff3408b1c       52.6MB         11.9MB    U   
+k8s-app:latest                    8ef74de3d6bb        717MB          180MB    U   
+my-php-app:latest                 f4e1605d04eb        717MB          180MB    U   
+mysql:8.0                         a3dff78d8762       1.08GB          247MB    U   
+phpmyadmin/phpmyadmin:latest      42a200db07b4       1.09GB          221MB    U   
+registry.k8s.io/coredns/coredns:v1.12.1
+                                  e8c262566636        101MB         22.4MB    U   
+registry.k8s.io/etcd:3.6.4-0      e36c08168342        273MB         74.3MB    U   
+registry.k8s.io/kube-apiserver:v1.34.1
+                                  b9d7c117f8ac        118MB         27.1MB    U   
+registry.k8s.io/kube-controller-manager:v1.34.1
+                                  2bf47c1b01f5        101MB         22.8MB    U   
+registry.k8s.io/kube-proxy:v1.34.1
+                                  913cc83ca0b5        102MB           26MB    U   
+registry.k8s.io/kube-scheduler:v1.34.1
+                                  6e9fbc4e25a5       73.5MB         17.4MB    U   
+registry.k8s.io/pause:3.10        ee6521f290b2       1.06MB          318kB    U   
+registry.k8s.io/pause:3.10.1      278fb9dbcca9       1.06MB          318kB        
+sofiane2003/mysite:latest         f0197740cd9b        717MB          180MB    U   
+sofiane2003/tp-4-docker:latest    f16016a2508d       1.27GB          197MB    U   
+test-web:latest                   cb2bf1e55c9b        708MB          176MB    U   
+tp-4-docker:latest                f16016a2508d       1.27GB          197MB    U   
+
+C:\Users\ELITE COMPUTER\Desktop\tp4_docker\partTwo>docker network inspect mynet
+[
+    {
+        "Name": "mynet",
+        "Id": "870009f3b22900308eb051bcadedd348547cec94fb6725aa569f3696b658c811",
+        "Created": "2026-04-15T13:30:30.399709178Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.23.0.0/16",
+                    "Gateway": "172.23.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Options": {
+            "com.docker.network.enable_ipv4": "true",
+            "com.docker.network.enable_ipv6": "false"
+        },
+        "Labels": {},
+        "Containers": {
+            "63db424e9bf39a0f780e93c78bcefaf55a87d0afa1566d62bcbe5f64d819b576": {
+                "Name": "db",
+                "EndpointID": "6e007b037833a27776c33cc8abff5689ccf143d1a423b8ff15bea4783f0d975b",
+                "MacAddress": "26:46:03:46:4a:0a",
+                "IPv4Address": "172.23.0.2/16",
+                "IPv6Address": ""
+            },
+            "e945acb8e6124104cf33551e51c145c64784c89ab3a6ba6fe00402bc58a39be6": {
+                "Name": "phpmyadmin",
+                "EndpointID": "fee647d35817fb47f6c070be9a2a4371f09870e9c87766384e2a1d808785a3ff",
+                "MacAddress": "e2:6c:9d:3c:8c:b7",
+                "IPv4Address": "172.23.0.3/16",
+                "IPv6Address": ""
+            },
+            "f6d62f725ac0df66cbceeb717c669e88aba4876cf6b3a4d05c3315b718e92931": {
+                "Name": "web",
+                "EndpointID": "39f4092b2395c566588abd1fa865e5329fbad3438e904a9fa137bfd2cd45733b",
+                "MacAddress": "ba:54:d9:04:42:36",
+                "IPv4Address": "172.23.0.4/16",
+                "IPv6Address": ""
+            }
+        },
+        "Status": {
+            "IPAM": {
+                "Subnets": {
+                    "172.23.0.0/16": {
+                        "IPsInUse": 6,
+                        "DynamicIPsAvailable": 65530
+                    }
+                }
+            }
+        }
+    }
+]
+C:\Users\ELITE COMPUTER\Desktop\tp4_docker\partTwo>docker run -d -p 3307:3306 --name db -e MYSQL_ROOT_PASSWORD=1234 mysql
+Unable to find image 'mysql:latest' locally
+latest: Pulling from library/mysql
+119fb62783d0: Pull complete
+79d0deb4205f: Pull complete
+a57121fed762: Pull complete
+524e9fe686eb: Pull complete
+961fc379bdf1: Pull complete
+bd9786ad6453: Pull complete
+0c9513d9d126: Pull complete
+b061cabbd0c3: Pull complete
+3fccd87f358c: Pull complete
+2bc0ec069c9c: Pull complete
+1b6478c2ec55: Download complete
+c60ece342068: Download complete
+Digest: sha256:9b69d1776846f437243ef5b6599e31ef11b317b60babbf37de21dfb38932dbc3
+Status: Downloaded newer image for mysql:latest
+2209740ca9c79b137098676e00055efc05abc94808c14c581e765b9bc4db7e63
+
+C:\Users\ELITE COMPUTER\Desktop\tp4_docker\partTwo>docker run -d --name web --network mynet -p 8080:80 php:apache
+Unable to find image 'php:apache' locally
+apache: Pulling from library/php
+4f4fb700ef54: Pull complete
+e9ba52b6db0a: Pull complete
+0c7db4a70ef5: Pull complete
+4353c28c1ac7: Pull complete
+e021796a72d1: Pull complete
+0945ee5e8db4: Pull complete
+f65b00f27e36: Pull complete
+60872a09cd81: Pull complete
+e1c8b82e7a27: Pull complete
+4ab4a308406f: Pull complete
+e715735ff63a: Pull complete
+3769a9846acf: Pull complete
+96b0748adb1d: Pull complete
+4ba7a7cb092b: Download complete
+ab9e46189934: Download complete
+Digest: sha256:103a8cd59a029b387470deace9736a7bc5aeb167a746774c68da82bb469c578c
+Status: Downloaded newer image for php:apache
+f6d62f725ac0df66cbceeb717c669e88aba4876cf6b3a4d05c3315b718e92931
+
+C:\Users\ELITE COMPUTER\Desktop\tp4_docker\partTwo>docker run -d --name web --network mynet -p 8080:80 php:apache
+Unable to find image 'php:apache' locally
+apache: Pulling from library/php
+4f4fb700ef54: Pull complete
+e9ba52b6db0a: Pull complete
+0c7db4a70ef5: Pull complete
+4353c28c1ac7: Pull complete
+e021796a72d1: Pull complete
+0945ee5e8db4: Pull complete
+f65b00f27e36: Pull complete
+60872a09cd81: Pull complete
+e1c8b82e7a27: Pull complete
+4ab4a308406f: Pull complete
+e715735ff63a: Pull complete
+3769a9846acf: Pull complete
+96b0748adb1d: Pull complete
+4ba7a7cb092b: Download complete
+ab9e46189934: Download complete
+Digest: sha256:103a8cd59a029b387470deace9736a7bc5aeb167a746774c68da82bb469c578c
+Status: Downloaded newer image for php:apache
+f6d62f725ac0df66cbceeb717c669e88aba4876cf6b3a4d05c3315b718e92931
+
+C:\Users\ELITE COMPUTER\Desktop\tp4_docker\partTwo>docker ps
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS         PORTS                                         NAMES
+f6d62f725ac0   php:apache              "docker-php-entrypoi…"   13 seconds ago   Up 9 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp       web
+e945acb8e612   phpmyadmin/phpmyadmin   "/docker-entrypoint.…"   5 minutes ago    Up 5 minutes   0.0.0.0:8081->80/tcp, [::]:8081->80/tcp       phpmyadmin
+63db424e9bf3   mysql                   "docker-entrypoint.s…"   7 minutes ago    Up 7 minutes   0.0.0.0:3307->3306/tcp, [::]:3307->3306/tcp   db
