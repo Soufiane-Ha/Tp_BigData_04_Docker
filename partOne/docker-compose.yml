@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  broker:
+    image: eclipse-mosquitto
+    ports:
+      - "1884:1884"
+
+  sensor:
+    build: ./sensor
+    command: python sensor.py
+    depends_on:
+      - broker
+
+  server:
+    build: ./server
+    command: python server.py
+    depends_on:
+      - broker

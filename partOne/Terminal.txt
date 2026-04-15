@@ -1,0 +1,2 @@
+PS C:\Users\ELITE COMPUTER\Desktop\tp4_docker> docker-compose up --build
+
